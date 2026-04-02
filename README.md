@@ -1,424 +1,173 @@
-# AI-Powered Codebase Explainer
+# AI Codebase Explainer Agent
 
-A production-grade, enterprise-level web application that helps developers understand large codebases instantly through AI-powered analysis, explanations, and interactive Q&A.
+An autonomous AI agent that analyzes GitHub repositories, explains project structure, detects potential bugs, and answers developer questions about the codebase.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![Express](https://img.shields.io/badge/Express-4.18-green)
+This project implements the **gitagent architecture**, where the AI agent is defined through configuration files and modular skills.
 
 ---
 
-## 🚀 Features
+## Features
 
-### Core Functionality
-- **📂 Repository Input**: Analyze GitHub repositories or upload ZIP files
-- **🏗️ Architecture Analysis**: AI-generated high-level architecture explanations
-- **📄 File-Level Insights**: Detailed explanations for individual files
-- **💬 Interactive Chat**: Ask questions about the codebase in natural language
-- **📊 Flow Visualization**: System flow diagrams generated with Mermaid
-- **🐛 Bug Detection**: AI-powered identification of potential bugs and security issues
-- **✨ Improvement Suggestions**: Code quality and optimization recommendations
-- **📈 Dashboard**: Tech stack, file distribution, and complexity metrics
-
-### UI/UX
-- **Professional Dark Theme**: Inspired by GitHub, Linear, and VS Code
-- **Resizable Panels**: Split-pane layout with persistent sizing
-- **Monaco Editor**: Industry-standard code viewer
-- **Smooth Animations**: Framer Motion-powered transitions
-- **Responsive Design**: Desktop-focused, optimized for developer workflows
-- **Skeleton Loaders**: Professional loading states
+- Analyze GitHub repositories
+- Explain project architecture
+- Detect potential bugs
+- Suggest improvements
+- Answer developer questions about the codebase
+- Modular skill-based AI agent design
 
 ---
 
-## 🛠️ Tech Stack
+## Agent Architecture
 
-### Frontend
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **Zustand** - Lightweight state management
-- **React Query** - Server state management
-- **Monaco Editor** - Code editor component
-- **Framer Motion** - Animations
-- **Axios** - HTTP client
-
-### Backend
-- **Node.js + Express** - REST API server
-- **TypeScript** - Type safety
-- **OpenAI API** - AI-powered analysis
-- **Axios** - GitHub API integration
-- **JSZip** - ZIP file processing
-- **Winston** - Structured logging
-- **Multer** - File upload handling
-
----
-
-## 📁 Project Structure
+The agent is defined using the gitagent structure.
 
 ```
-ai-codebase-explainer/
-├── backend/                      # Express API Server
-│   ├── src/
-│   │   ├── config/              # Environment & API configuration
-│   │   ├── controllers/         # Request handlers
-│   │   ├── services/            # Business logic
-│   │   │   ├── repository/      # GitHub & ZIP handling
-│   │   │   ├── ai/              # OpenAI integration
-│   │   │   ├── analysis/        # Code analysis services
-│   │   │   └── storage/         # Session management
-│   │   ├── middleware/          # Express middleware
-│   │   ├── routes/              # API routes
-│   │   ├── types/               # TypeScript types
-│   │   ├── utils/               # Utilities
-│   │   ├── app.ts               # Express app setup
-│   │   └── server.ts            # Server entry point
-│   ├── uploads/                 # Temporary file storage
-│   ├── sessions/                # Session data
-│   └── logs/                    # Application logs
+agent/
+├── agent.yaml
+├── SOUL.md
+├── RULES.md
+└── skills/
+    └── repo-analysis/
+        └── SKILL.md
+```
+
+### Agent Components
+
+**agent.yaml**
+- Defines the agent configuration and capabilities.
+
+**SOUL.md**
+- Defines the identity and personality of the AI agent.
+
+**RULES.md**
+- Defines the behavioral constraints and safety rules.
+
+**SKILL.md**
+- Defines the capabilities of the agent.
+
+---
+
+## Project Structure
+
+```
+ai-agent/
 │
-└── frontend/                    # Next.js Application
-    ├── src/
-    │   ├── app/                 # Next.js App Router
-    │   │   ├── analyze/         # Analysis page
-    │   │   └── page.tsx         # Landing page
-    │   ├── components/          # React components
-    │   │   ├── ui/              # Reusable UI primitives
-    │   │   ├── layout/          # Layout components
-    │   │   ├── repository/       # Repository-related
-    │   │   ├── editor/          # Monaco editor
-    │   │   ├── ai/              # AI components
-    │   │   ├── dashboard/       # Dashboard components
-    │   │   └── visualization/   # Flow diagrams
-    │   ├── hooks/               # Custom React hooks
-    │   ├── store/               # Zustand state management
-    │   ├── lib/                 # Utilities & API client
-    │   ├── types/               # TypeScript types
-    │   └── constants/           # Constants & config
-    └── public/                  # Static assets
+├── agent/
+│   ├── agent.yaml
+│   ├── SOUL.md
+│   ├── RULES.md
+│   └── skills/
+│       └── repo-analysis/
+│           └── SKILL.md
+│
+├── aiService.js
+├── index.js
+├── package.json
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## How It Works
 
-### Prerequisites
+1. The user provides a GitHub repository URL.
+2. The AI agent analyzes the repository.
+3. The agent generates insights such as:
+   - project overview
+   - architecture explanation
+   - bug detection
+   - improvement suggestions
 
-- **Node.js** 18+ and npm/yarn
-- **OpenAI API Key** ([Get one here](https://platform.openai.com/api-keys))
-- **GitHub Token** (optional, for private repos)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd ai-codebase-explainer
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-   Create `.env` file:
-   ```bash
-   cp .env.example .env
-   ```
-
-   Edit `.env` and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   GITHUB_TOKEN=optional_github_token
-   PORT=3001
-   NODE_ENV=development
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-
-   Create `.env.local` file:
-   ```bash
-   cp .env.local.example .env.local
-   ```
-
-   Edit `.env.local`:
-   ```
-   NEXT_PUBLIC_API_URL=http://localhost:3001
-   NEXT_PUBLIC_ENV=development
-   ```
-
-### Running the Application
-
-1. **Start the Backend** (Terminal 1)
-   ```bash
-   cd backend
-   npm run dev
-   ```
-   Backend will run on `http://localhost:3001`
-
-2. **Start the Frontend** (Terminal 2)
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-   Frontend will run on `http://localhost:3000`
-
-3. **Open your browser**
-   Navigate to `http://localhost:3000`
+The AI reasoning is powered by **Groq LLM (LLaMA 3.1)**.
 
 ---
 
-## 🎯 Usage
+## Installation
 
-### Analyze a GitHub Repository
-
-1. On the landing page, select "GitHub URL"
-2. Enter a public GitHub repository URL (e.g., `https://github.com/facebook/react`)
-3. Click "Analyze Repository"
-4. Wait for the analysis to complete (10-30 seconds)
-
-### Upload a ZIP File
-
-1. Select "Upload ZIP"
-2. Drag and drop or click to upload a ZIP file of your codebase
-3. Click "Analyze Codebase"
-
-### Exploring the Analysis
-
-- **Left Panel**: File tree navigator
-- **Center Panel**: Code viewer (Monaco Editor)
-- **Right Panel**: AI explanations with tabs:
-  - Overview: Architecture and tech stack
-  - Explanation: File-level details
-  - Bugs: Potential issues
-  - Flow: System diagrams
-- **Bottom/Floating**: Chat interface for questions
-
----
-
-## 🏗️ Architecture
-
-### AI Integration Strategy
-
-**Context Management**
-- Smart token allocation (8K context window)
-- Priority-based context selection
-- Efficient chunking with semantic boundaries
-
-**Models Used**
-- GPT-4 Turbo: Complex analysis, architecture overviews
-- GPT-3.5 Turbo: Simple tasks, file summaries
-- text-embedding-3-small: Semantic search (optional)
-
-**Optimizations**
-- Streaming responses for better UX
-- Aggressive caching (1-24 hour TTL)
-- Request deduplication
-- Rate limiting
-
-### Large Codebase Handling
-
-- **Filtering**: Excludes node_modules, dist, binaries, etc.
-- **Sampling**: For repos > 1000 files, analyzes priority files only
-- **Progressive Loading**: On-demand file content fetching
-- **Lazy Analysis**: Background processing based on user interaction
-
----
-
-## 📝 API Endpoints
-
-### Repository Management
+Install dependencies:
 
 ```
-POST   /api/repository/analyze-github
-Body: { githubUrl: string, branch?: string }
-Response: { sessionId, fileTree, metadata }
-
-POST   /api/repository/upload-zip
-Body: FormData (multipart)
-Response: { sessionId, fileTree, metadata }
-
-GET    /api/repository/:sessionId/file?filePath=path/to/file
-Response: { path, content, language, size, lines }
-
-GET    /api/repository/:sessionId/tree
-Response: { fileTree, metadata }
-```
-
-### Analysis (To be implemented)
-
-```
-GET    /api/analysis/:sessionId/overview
-POST   /api/analysis/:sessionId/file-explanation
-POST   /api/analysis/:sessionId/bug-detection
-GET    /api/analysis/:sessionId/flow-diagram
-```
-
-### Chat (To be implemented)
-
-```
-POST   /api/chat/:sessionId/message
-GET    /api/chat/:sessionId/history
-DELETE /api/chat/:sessionId/history
+npm install
 ```
 
 ---
 
-## 🧪 Development
+## Run the Agent
 
-### Backend
+Start the AI agent:
 
-```bash
-# Run in development mode with auto-reload
-npm run dev
-
-# Build for production
-npm run build
-
-# Run production build
-npm start
-
-# Lint code
-npm run lint
-
-# Format code
-npm run format
+```
+node index.js
 ```
 
-### Frontend
+Enter a GitHub repository URL when prompted.
 
-```bash
-# Run in development mode
-npm run dev
+Example:
 
-# Build for production
-npm run build
-
-# Run production build
-npm start
-
-# Lint code
-npm run lint
-
-# Format code
-npm run format
+```
+https://github.com/facebook/react
 ```
 
 ---
 
-## 🚢 Deployment
+## Agent Commands
 
-### Frontend (Vercel - Recommended)
+Once the repository is loaded, you can interact with the agent:
 
-1. Push code to GitHub
-2. Create a new project on [Vercel](https://vercel.com)
-3. Connect your repository
-4. Add environment variables:
-   - `NEXT_PUBLIC_API_URL`: Your backend API URL
-5. Deploy
+```
+analyze
+```
 
-### Backend (Railway/Render)
+Explains the repository architecture.
 
-1. Push code to GitHub
-2. Create a new service on [Railway](https://railway.app) or [Render](https://render.com)
-3. Connect your repository
-4. Add environment variables (see `.env.example`)
-5. Deploy
+```
+bugs
+```
 
----
+Detects possible bugs and issues.
 
-## 🔐 Environment Variables
+```
+question
+```
 
-### Backend
-
-| Variable | Required | Description | Default |
-|---|---------|-------------|---------|
-| `OPENAI_API_KEY` | ✅ | OpenAI API key | - |
-| `GITHUB_TOKEN` | ❌ | GitHub personal access token | - |
-| `PORT` | ❌ | Server port | 3001 |
-| `NODE_ENV` | ❌ | Environment | development |
-| `MAX_FILE_SIZE` | ❌ | Max upload size (bytes) | 52428800 (50MB) |
-| `SESSION_TTL` | ❌ | Session lifetime (seconds) | 3600 (1 hour) |
-
-### Frontend
-
-| Variable | Required | Description | Default |
-|----------|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | ✅ | Backend API URL | http://localhost:3001 |
-| `NEXT_PUBLIC_ENV` | ❌ | Environment | development |
+Ask questions about the codebase.
 
 ---
 
-## 🎨 Design System
+## Example Workflow
 
-### Colors (Dark Theme)
+```
+node index.js
 
-- Background: `#0d1117`
-- Surface: `#161b22`
-- Border: `#30363d`
-- Text Primary: `#c9d1d9`
-- Text Secondary: `#8b949e`
-- Accent: `#58a6ff`
-- Success: `#3fb950`
-- Warning: `#d29922`
-- Error: `#f85149`
+Enter GitHub Repo URL:
+https://github.com/facebook/react
 
-### Typography
+Ask something:
+analyze
+```
 
-- UI Font: Inter (400, 500, 600, 700)
-- Code Font: JetBrains Mono (400, 500)
-- Base Size: 14px
+The agent will generate a structured explanation of the repository.
 
 ---
 
-## 🤝 Contributing
+## Tech Stack
 
-Contributions are welcome! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- Node.js
+- JavaScript
+- Groq LLM (LLaMA 3.1)
+- Gitagent architecture
 
 ---
 
-## 📄 License
+## Future Improvements
 
-This project is licensed under the MIT License.
-
----
-
-## 🙏 Acknowledgments
-
-- **OpenAI** for GPT-4 API
-- **Vercel** for Next.js
-- **Monaco Editor** for the code editor component
-- **Tailwind CSS** for the styling framework
+- File-level explanations
+- Architecture diagrams
+- Multi-repository comparison
+- Web interface for the agent
 
 ---
 
-## 📧 Contact
+## License
 
-For questions or feedback, please open an issue on GitHub.
-
----
-
-## 🗺️ Roadmap
-
--  GitHub OAuth for private repositories
-- [ ] Save and bookmark analyzed repositories
-- [ ] Multi-repo comparison
-- [ ] Team collaboration features
-- [ ] Export analysis as PDF/Markdown
-- [ ] Real-time collaboration
-- [ ] VS Code extension
-
----
-
-**Built with ❤️ for developers who love great code**
+MIT License
