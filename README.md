@@ -8,12 +8,12 @@ This project implements the **gitagent architecture**, where the AI agent is def
 
 ## Features
 
-- Analyze GitHub repositories
-- Explain project architecture
-- Detect potential bugs
-- Suggest improvements
-- Answer developer questions about the codebase
-- Modular skill-based AI agent design
+* Analyze GitHub repositories
+* Explain project architecture
+* Detect potential bugs
+* Suggest improvements
+* Answer developer questions about the codebase
+* Modular skill-based AI agent design
 
 ---
 
@@ -34,16 +34,20 @@ agent/
 ### Agent Components
 
 **agent.yaml**
-- Defines the agent configuration and capabilities.
+
+* Defines the agent configuration and capabilities.
 
 **SOUL.md**
-- Defines the identity and personality of the AI agent.
+
+* Defines the identity and personality of the AI agent.
 
 **RULES.md**
-- Defines the behavioral constraints and safety rules.
+
+* Defines the behavioral constraints and safety rules.
 
 **SKILL.md**
-- Defines the capabilities of the agent.
+
+* Defines the capabilities of the agent.
 
 ---
 
@@ -71,12 +75,13 @@ ai-agent/
 ## How It Works
 
 1. The user provides a GitHub repository URL.
-2. The AI agent analyzes the repository.
+2. The AI agent downloads and analyzes the repository code.
 3. The agent generates insights such as:
-   - project overview
-   - architecture explanation
-   - bug detection
-   - improvement suggestions
+
+   * project overview
+   * architecture explanation
+   * bug detection
+   * improvement suggestions
 
 The AI reasoning is powered by **Groq LLM (LLaMA 3.1)**.
 
@@ -89,6 +94,24 @@ Install dependencies:
 ```
 npm install
 ```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root and add your Groq API key.
+
+Example:
+
+```
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+You can generate an API key from:
+
+https://console.groq.com/keys
+
+Make sure the `.env` file is **not committed to GitHub**.
 
 ---
 
@@ -152,19 +175,19 @@ The agent will generate a structured explanation of the repository.
 
 ## Tech Stack
 
-- Node.js
-- JavaScript
-- Groq LLM (LLaMA 3.1)
-- Gitagent architecture
+* Node.js
+* JavaScript
+* Groq LLM (LLaMA 3.1)
+* Gitagent architecture
 
 ---
 
 ## Future Improvements
 
-- File-level explanations
-- Architecture diagrams
-- Multi-repository comparison
-- Web interface for the agent
+* File-level explanations
+* Architecture diagrams
+* Multi-repository comparison
+* Web interface for the agent
 
 ---
 
