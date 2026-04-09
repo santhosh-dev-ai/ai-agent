@@ -14,30 +14,38 @@ console.log("🤖 Autonomous AI Agent Started!\n");
 rl.question("Enter GitHub Repo URL: ", (repoUrl) => {
 
   function ask() {
-    rl.question("\n💬 Ask something (analyze / bugs / question): ", async (input) => {
-      try {
-        let result;
+  rl.question("\n💬 Ask something (analyze / bugs / question / exit): ", async (input) => {
+    try {
 
-        if (input.toLowerCase() === "analyze") {
-          result = await analyzeRepo(repoUrl);
-        } 
-        else if (input.toLowerCase() === "bugs") {
-          result = await detectBugs(repoUrl);
-        } 
-        else {
-          result = await chatWithRepo(repoUrl, input);
-        }
-
-        console.log("\n🧠 AI Response:\n");
-        console.log(result);
-
-        ask();
-      } catch (err) {
-        console.error("❌ Error:", err.message);
+      if (input.toLowerCase() === "exit") {
+        console.log("\n👋 Exiting AI Agent. Goodbye!");
         rl.close();
+        process.exit(0);
       }
-    });
-  }
+
+      let result;
+
+      if (input.toLowerCase() === "analyze") {
+        result = await analyzeRepo(repoUrl);
+      } 
+      else if (input.toLowerCase() === "bugs") {
+        result = await detectBugs(repoUrl);
+      } 
+      else {
+        result = await chatWithRepo(repoUrl, input);
+      }
+
+      console.log("\n🧠 AI Response:\n");
+      console.log(result);
+
+      ask();
+
+    } catch (err) {
+      console.error("❌ Error:", err.message);
+      rl.close();
+    }
+  });
+}
 
   ask();
 });

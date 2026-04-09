@@ -14,6 +14,7 @@ This project implements the **gitagent architecture**, where the AI agent is def
 * Suggest improvements
 * Answer developer questions about the codebase
 * Modular skill-based AI agent design
+* Interactive CLI agent with exit command
 
 ---
 
@@ -155,6 +156,12 @@ question
 
 Ask questions about the codebase.
 
+```
+exit
+```
+
+Stops the AI agent and exits the program.
+
 ---
 
 ## Example Workflow
@@ -167,9 +174,15 @@ https://github.com/facebook/react
 
 Ask something:
 analyze
+
+Ask something:
+bugs
+
+Ask something:
+exit
 ```
 
-The agent will generate a structured explanation of the repository.
+The agent will analyze the repository and exit when requested.
 
 ---
 
@@ -179,6 +192,8 @@ The agent will generate a structured explanation of the repository.
 * JavaScript
 * Groq LLM (LLaMA 3.1)
 * Gitagent architecture
+* JSZip (repository extraction)
+* node-fetch (GitHub communication)
 
 ---
 
